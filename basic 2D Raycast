@@ -1,0 +1,27 @@
+using UnityEngine;
+
+public class PlayerRaycast : MonoBehaviour
+{
+    public float raycastDistance = 10f;
+    public LayerMask groundLayer;
+
+    private void Update()
+    {
+        CastRay();
+    }
+
+    private void CastRay()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
+
+        if (hit.collider != null)
+        {
+            Debug.Log("Hit object: " + hit.collider.name);
+            Debug.DrawRay(transform.position, Vector2.down * hit.distance, Color.red);
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, Vector2.down * raycastDistance, Color.green);
+        }
+    }
+}
